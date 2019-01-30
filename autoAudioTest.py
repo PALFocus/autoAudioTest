@@ -927,21 +927,28 @@ while i <= numOfTestLoops:
             cmdOption = "%s -endpos %d"%(sPlayerOption, rec[VALUE_OF_AUDIO_DURATION]) 
             simAudioDuration = rec[VALUE_OF_AUDIO_DURATION]
         
-        cmd = "%s\%s %s %s\%s"%(sPlayerPath, sPlayerName, cmdOption, audioPath, rec[VALUE_OF_AUDIO_NAME])
-        print(cmd)
-        print(cmd, file=logfile)
-        
         if (softwareSimulation):
+            print("SIMU: paly %s\%s"%(audioPath, rec[VALUE_OF_AUDIO_NAME]))
+            print("SIMU: paly %s\%s"%(audioPath, rec[VALUE_OF_AUDIO_NAME]), file=logfile)
             print("SIMU: audio play duration for %d seconds"%simAudioDuration)
             print("SIMU: audio play duration for %d seconds"%simAudioDuration, file=logfile)
             time.sleep(simAudioDuration)
         else:
             if blPlayerInternal:
+                print("INTERNAL: paly %s\%s"%(audioPath, rec[VALUE_OF_AUDIO_NAME]))
+                print("INTERNAL: paly %s\%s"%(audioPath, rec[VALUE_OF_AUDIO_NAME]), file=logfile)
                 mixer.init()
                 mixer.music.load("%s\%s"%(audioPath, rec[VALUE_OF_AUDIO_NAME]))
                 mixer.music.play()
                 time.sleep(simAudioDuration)
             else:
+                cmd = "%s\%s %s %s\%s"%(sPlayerPath, 
+                                        sPlayerName, 
+                                        cmdOption, 
+                                        audioPath, 
+                                        rec[VALUE_OF_AUDIO_NAME])
+                print(cmd)
+                print(cmd, file=logfile)
                 fp=os.popen(cmd) 
                 fpread=fp.read()
                 print("%s"%fpread)
@@ -959,11 +966,11 @@ while i <= numOfTestLoops:
             rand = random.random()
             if (rand > 0.5):
                 blResult = False;
-                print("SIMU: Radom(%f) Failed."%rand)
-                print("SIMU: Radom(%f) Failed."%rand, file=logfile)
+                print("SIMU: Radom(%f) Result Failed."%rand)
+                print("SIMU: Radom(%f) Result Failed."%rand, file=logfile)
             else:
-                print("SIMU: Radom(%f) Passed."%rand)
-                print("SIMU: Radom(%f) Passed."%rand, file=logfile)
+                print("SIMU: Radom(%f) Result Passed."%rand)
+                print("SIMU: Radom(%f) Result Passed."%rand, file=logfile)
         else:
             # serial get power should be implemented here.            
             bCmdPrefix  = METER_CMD_PREFIX
@@ -1050,8 +1057,9 @@ while i <= numOfTestLoops:
                 print("TEST: %s (%d/%d) Failed(%d)."%(rec[VALUE_OF_OPERATION_NAME], iPower, rec[VALUE_OF_LIGHT_POWER],iRes), file=logfile)
 
         trt.result_add(key, blResult, trd)
+        
         overallTestTimeRemainedInSeconds = overallTestTimeRemainedInSeconds - \
-            rec[VALUE_OF_AUDIO_DURATION] - rec[VALUE_OF_LIGHT_DELAY]
+            simAudioDuration - rec[VALUE_OF_LIGHT_DELAY]
             
         verbose_ping_ex(pingAddress, logfile)
         overallTestTimeRemainedInSeconds = overallTestTimeRemainedInSeconds - intervalOfTestSteps
