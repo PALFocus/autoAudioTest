@@ -1,0 +1,60 @@
+###########################################################
+### Anaconda spyder 命令行参数输入方法
+###########################################################
+runfile('C:/Users/daniel/.spyder-py3/autoAudioTest/autoAudioTest.py', args='-h', wdir='C:/Users/daniel/.spyder-py3/autoAudioTest')
+debugfile('C:/Users/daniel/.spyder-py3/autoAudioTest/autoAudioTest.py', args='-h', wdir='C:/Users/daniel/.spyder-py3/autoAudioTest')
+
+###########################################################
+### Anaconda 编译环境安装
+###########################################################
+conda create --name python27 python=2.7
+conda create --name python34 python=3.4
+conda create --name python33 python=3.3
+
+###########################################################
+### Anaconda 编译环境切换
+###########################################################
+conda info -e    # 查询
+
+# To activate this environment, use
+#
+#     $ conda activate python27
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+
+#
+# To activate this environment, use
+#
+#     $ conda activate python34
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+#
+# To activate this environment, use
+#
+#     $ conda activate python33
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+###########################################################
+### Anaconda 编译exe
+###########################################################
+python setup.py py2exe
+
+###########################################################
+### Anaconda 基础件安装
+###########################################################
+python -m pip install --upgrade pip
+
+pip install py2exe
+pip install pyserial
+pip install System
+pip install pyreadline
+pip install mutagen
