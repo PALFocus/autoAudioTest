@@ -46,15 +46,31 @@ conda info -e    # 查询
 ###########################################################
 ### Anaconda 编译exe
 ###########################################################
-python setup.py py2exe
+$ python setup.py py2exe
 
 ###########################################################
 ### Anaconda 基础件安装
 ###########################################################
-python -m pip install --upgrade pip
+$ python -m pip install --upgrade pip
 
-pip install py2exe
-pip install pyserial
-pip install System
-pip install pyreadline
-pip install mutagen
+$ pip install py2exe
+$ pip install pyserial
+$ pip install System
+$ pip install pyreadline
+$ pip install mutagen
+
+
+###########################################################
+### pip 使用国内镜像源
+###########################################################
+查看 镜像地址：
+
+$ pip3 config list   
+global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'
+install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'
+
+$ pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+清华大学: https://pypi.tuna.tsinghua.edu.cn/simple
+中国科学技术大学 : https://pypi.mirrors.ustc.edu.cn/simple
+豆瓣：http://pypi.douban.com/simple/
